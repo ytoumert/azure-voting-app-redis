@@ -15,9 +15,9 @@ jobs:
         with:
           creds: |
             {
-              "appId": "47bf67e5-74e7-4f2e-8025-d34b18170bf2",
-              "displayName": "azure-cli-2023-09-07-10-08-37",
-              "password": "~IK8Q~sQtHRDSjwt~fzka~yagNECbRd.vK3vaa8r",
+              "appId": "60604a5b-d2d5-415d-8687-69b34d2cf7d8",
+              "displayName": "azure-cli-2023-09-07-10-26-48",
+              "password": "_ND8Q~tE3mm2TwAEKX6WQnslsAH30Y0fEiJU2c8j",
               "tenant": "15a04113-b4c2-4267-9c1f-382c145145db"
             }
       - name: Set AKS context
