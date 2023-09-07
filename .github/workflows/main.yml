@@ -9,17 +9,24 @@ jobs:
     steps:
       - name: Checkout source code 
         uses: actions/checkout@v3  
+      - name: ACR build
+        id: build-push-acr
+        uses: azure/acr-build@v1
+        with:
+          service_principal: ${{ secrets.SERVICE_PRINCIPAL }}
+          service_principal_password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
+          tenant: ${{ secrets.TENANT }}
+          registry: ${{ secrets.REGISTRE }}
+          repository: ${{ secrets.REPOSITORY }}
+          image:  azure-vote-front
+          folder: azure-vote
+          branch: master
+          tag: ${{ github.sha }}
       - name: Azure login
         id: login
         uses: azure/login@v1.4.3
         with:
-          creds: |
-            {
-              "appId": "60604a5b-d2d5-415d-8687-69b34d2cf7d8",
-              "displayName": "azure-cli-2023-09-07-10-26-48",
-              "password": "_ND8Q~tE3mm2TwAEKX6WQnslsAH30Y0fEiJU2c8j",
-              "tenant": "15a04113-b4c2-4267-9c1f-382c145145db"
-            }
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Set AKS context
         id: set-context
         uses: azure/aks-set-context@v3
@@ -34,7 +41,7 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           namespace: 'default'
-          manifests: |
+          manifests:
              azure-vote-all-in-one-redis.yaml
-          images: 'mcr.microsoft.com/azuredocs/azure-vote-front:v1'
+          images: yanisacr.azurecr.io/azuredocs/azure-vote-front:${{ github.sha }}
           pull-images: false
