@@ -31,7 +31,7 @@ jobs:
         id: set-context
         uses: azure/aks-set-context@v3
         with:
-          resource-group: '09_Yanis' 
+          resource-group: '09_YanisT' 
           cluster-name: 'YanisTAKS2'
       - name: Setup kubectl
         id: install-kubectl
