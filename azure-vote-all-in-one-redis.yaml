@@ -17,7 +17,6 @@ spec:
       containers:
       - name: azure-vote-back
         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
-        #image : YanisACR.azurecr.io/azuredocs/azure-vote-front:v1
         env:
         - name: ALLOW_EMPTY_PASSWORD
           value: "yes"
@@ -58,7 +57,9 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: azure-vote-front
-        image : yanisacr.azurecr.io/azuredocs/azure-vote-front:v1
+        #image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+        #image: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/azure-vote-front:${{ github.sha }}'
+        image: YanisACR.azurecr.io/azuredocs/azure-vote-front:v1
         ports:
         - containerPort: 80
         resources:
